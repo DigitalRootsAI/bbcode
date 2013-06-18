@@ -1,7 +1,9 @@
 bbcode rendering library
 ========================
-> npm install
-> grunt --force
+```
+npm install
+grunt --force
+```
 
 * supports client-side JS (both global inclusion + require/AMD), and node
 * simple API
