@@ -11,6 +11,12 @@
                 expect(result).to.equal('<div class="bbcode_quote">Quote:<blockquote><a class="bbcode_link" target="_blank" href="http://www.example.com">Originally Posted by Author</a>Test Text</blockquote></div>');
             });
         });
+        describe("quote", function () {
+            it("renders properly", function () {
+                var result = bbcode.render("[QUOTE=Author]Test Text[/QUOTE]");
+                expect(result).to.equal('<div class="bbcode_quote">Author wrote:<blockquote>Test Text</blockquote></div>');
+            });
+        });
         describe("url with href", function () {
             it("renders properly", function () {
                 var result = bbcode.render("[url=http://www.example.com]Originally Posted by Author[/url]");
