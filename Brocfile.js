@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2015 3CSI All Rights Reserved
- * 
- * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF 3CSI
- * The copyright notice above does not evidence any actual or intended
- * publication of such source code.
- */
 var dist = require('broccoli-dist-es6-module'),
     mergeTrees = require('broccoli-merge-trees'),
     pickFiles = require('broccoli-static-compiler'),
