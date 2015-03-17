@@ -1,3 +1,5 @@
+[![Travis Build Status](https://travis-ci.org/DigitalRootsCRM/bbcode.svg)](https://travis-ci.org/DigitalRootsCRM/bbcode/)
+
 bbcode.js
 =========
 
@@ -22,6 +24,8 @@ Usage
 -----
 
 ```js
+var bbcode = require('bbcode.js');
+
 var result = bbcode.render("[url=\"http://www.example.com\"]Originally Posted by Author[/url]");
 
 // Would render:
