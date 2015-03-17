@@ -1,6 +1,7 @@
 {
-    "name": "bbcode",
-    "version": "0.1.0",
+    "name": "bbcode.js",
+    "description": "Simple bbcode rendering library",
+    "version": "0.2.0",
     "dependencies": {},
     "devDependencies": {
         "broccoli": "^0.15.0",
@@ -18,10 +19,8 @@
         "grunt-mocha": "~0.2.2",
         "matchdep": "^0.3.0"
     },
-    "engines": {
-        "node": ">=0.8.0"
-    },
     "scripts": {
         "test": "node_modules/.bin/grunt test"
-    }
+    },
+    "main" : "dist/bbcode.js"
 }
