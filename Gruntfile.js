@@ -9,26 +9,23 @@ module.exports = function (grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
-        clean: {
-            dist: ['.tmp', 'dist/*'],
-            server: '.tmp'
-        },
-        uglify: {
-            my_target: {
-                files: {
-                    'dist/bbcode.min.js': ['src/*.js']
-                }
+        broccoli_build: {
+            assets: {
+                dest: 'dist/',
+                brocfile: 'Brocfile.js' // default
             }
         },
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc'
-            },
-            all: [
-                'Gruntfile.js',
-                'src/*.js'
-//                'test/spec/{,*/}*.js'
-            ]
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        'tmp',
+                        'dist'
+                    ]
+                }]
+            }
         },
         connect: {
             options: {
@@ -56,19 +53,18 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
-        'clean',
+        'clean:dist',
+        'broccoli_build',
         'connect:test',
         'mocha'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
-        'uglify'
+        'broccoli_build'
     ]);
 
     grunt.registerTask('default', [
-        'jshint',
-        'test',
-        'build'
+        'test'
     ]);
 };

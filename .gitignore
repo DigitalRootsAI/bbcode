@@ -1,3 +1,19 @@
-node_modules
-dist
-.tmp
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist/*
+/tmp
+/docs
+
+# dependencies
+/node_modules
+/bower_components
+
+npm*.log
+
+!/dist/bbcode.js
+!/dist/bbcode.min.js
+
+*~
+.idea
+*.iml

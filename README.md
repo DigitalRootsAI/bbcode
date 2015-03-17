@@ -2,7 +2,7 @@ bbcode rendering library
 ========================
 ```
 npm install
-grunt --force
+npm test
 ```
 
 * supports client-side JS (both global inclusion + require/AMD), and node
