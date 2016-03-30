@@ -77,5 +77,71 @@
                 expect(result).to.equal('<pre class="bbcode_code">\nleave me alone!</pre>');
             });
         });
+        describe("code php", function () {
+            it("renders properly", function () {
+                var result = bbcode.render("[php]$myvar = 'Hello World!';[/php]");
+                expect(result).to.equal('<pre class="bbcode_code_php">$myvar = \'Hello World!\';</pre>');
+            });
+        });
+        describe("mention", function () {
+            it("renders properly", function () {
+                var result = bbcode.render("[MENTION]Princess Zelda[/MENTION]");
+                expect(result).to.equal('<span class="bbcode_mention">@Princess Zelda</span>');
+            });
+        });
+        describe("mention with id", function () {
+            it("renders properly", function () {
+                var result = bbcode.render("[MENTION=12345]Princess Zelda[/MENTION]");
+                expect(result).to.equal('<span class="bbcode_mention" data-mention-id="12345">@Princess Zelda</span>');
+            });
+        });
+        describe("mention without prefix", function () {
+            it("renders properly", function () {
+                var result = bbcode.render("[MENTION=12345]Princess Zelda[/MENTION]", {mentionPrefix: ''});
+                expect(result).to.equal('<span class="bbcode_mention" data-mention-id="12345">Princess Zelda</span>');
+            });
+        });
+        describe("html", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[HTML]<img src="image.gif" alt="image"/><a href="testing.html" target="_blank">Testing</a>[/HTML]');
+                expect(result).to.equal('<img src="image.gif" alt="image"/><a href="testing.html" target="_blank">Testing</a>');
+            });
+        });
+        describe("simple list", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[list][*]Link [*]Zelda [*]Sheik [/list]');
+                expect(result).to.equal('<ul class="bbcode_list"><li>Link</li><li>Zelda</li><li>Sheik</li></ul>');
+            });
+        });
+        describe("default to simple list on bad param", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[list=Z][*]Link [*]Zelda [*]Sheik [/list]');
+                expect(result).to.equal('<ul class="bbcode_list"><li>Link</li><li>Zelda</li><li>Sheik</li></ul>');
+            });
+        });
+        describe("numeric list", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[list=1][*]Link [*]Zelda [*]Sheik [/list]');
+                expect(result).to.equal('<ol class="bbcode_list_numeric"><li>Link</li><li>Zelda</li><li>Sheik</li></ol>');
+            });
+        });
+        describe("alpha upper list", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[list=A][*]Link [*]Zelda [*]Sheik [/list]');
+                expect(result).to.equal('<ol class="bbcode_list_alpha"><li>Link</li><li>Zelda</li><li>Sheik</li></ol>');
+            });
+        });
+        describe("alpha lower list", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[list=a][*]Link [*]Zelda [*]Sheik [/list]');
+                expect(result).to.equal('<ol class="bbcode_list_alpha_lower"><li>Link</li><li>Zelda</li><li>Sheik</li></ol>');
+            });
+        });
+        describe("indent", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[INDENT]block me[/INDENT]');
+                expect(result).to.equal('<blockquote>block me</blockquote>');
+            });
+        });
     });
 })();

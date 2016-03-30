@@ -1,7 +1,8 @@
 'use strict';
+var serveStatic = require('serve-static');
 
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+var mountFolder = function (dir) {
+    return serveStatic(require('path').resolve(dir));
 };
 
 module.exports = function (grunt) {
@@ -36,7 +37,17 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, '.')
+                            mountFolder('.')
+                        ];
+                    }
+                }
+            },
+            testServe: {
+                options: {
+                    keepalive: true,
+                    middleware: function (connect) {
+                        return [
+                            mountFolder('.')
                         ];
                     }
                 }
@@ -57,6 +68,12 @@ module.exports = function (grunt) {
         'broccoli_build',
         'connect:test',
         'mocha'
+    ]);
+
+    grunt.registerTask('test-server', [
+        'clean:dist',
+        'broccoli_build',
+        'connect:testServe'
     ]);
 
     grunt.registerTask('build', [
