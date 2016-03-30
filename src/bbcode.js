@@ -1,4 +1,4 @@
-var VERSION = '0.2.0',
+var VERSION = '0.3.0',
 // default options
     defaults = {
         showQuotePrefix: true,
