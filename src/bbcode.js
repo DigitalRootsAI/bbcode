@@ -45,7 +45,7 @@ export var render = function (content, options) {
                 return '<em>' + value + '</em>';
             case 'u':
                 return '<span style="text-decoration:underline">' + value + '</span>';
-            case 'u':
+            case 's':
                 return '<span style="text-decoration:line-through">' + value + '</span>';
             case 'code':
                 return '<pre class="' + options.classPrefix + 'code">' + value + '</pre>';
