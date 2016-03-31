@@ -11,7 +11,7 @@
                 expect(result).to.equal('<div class="bbcode_quote">Quote:<blockquote><a class="bbcode_link" target="_blank" href="http://www.example.com">Originally Posted by Author</a>Test Text</blockquote></div>');
             });
         });
-        describe("quote", function () {
+        describe("simple quote", function () {
             it("renders properly", function () {
                 var result = bbcode.render("[QUOTE=Author]Test Text[/QUOTE]");
                 expect(result).to.equal('<div class="bbcode_quote">Author wrote:<blockquote>Test Text</blockquote></div>');
@@ -141,6 +141,69 @@
             it("renders properly", function () {
                 var result = bbcode.render('[INDENT]block me[/INDENT]');
                 expect(result).to.equal('<blockquote>block me</blockquote>');
+            });
+        });
+        describe("quote with params", function () {
+            it("renders properly", function () {
+                var result = bbcode.render('[quote name="Princess Zelda" post=93846865]\n[IMG]http://cdn-2.motor1.com/p/static/img/mglr/600000/610000/614000/614400/614488/000.jpg[/IMG][/QUOTE]');
+                expect(result).to.equal('<div class="bbcode_quote" data-post="93846865">Princess Zelda wrote:<blockquote>\n<img class="bbcode_image" src="http://cdn-2.motor1.com/p/static/img/mglr/600000/610000/614000/614400/614488/000.jpg"/></blockquote></div>');
+            });
+        });
+    });
+
+
+    describe('extractQuotedText', function () {
+        describe("no quote", function () {
+            it("matches", function () {
+                var result = bbcode.extractQuotedText('something');
+                expect(result[0]).to.equal('something');
+                expect(result[1]).to.equal(undefined);
+            });
+        });
+        describe("single quote", function () {
+            it("matches", function () {
+                var result = bbcode.extractQuotedText('"something"', ["more", "data"]);
+                expect(result[0]).to.equal('something');
+                expect(result[1].length).to.equal(2);
+            });
+        });
+        describe("multi term quote", function () {
+            it("matches", function () {
+                var result = bbcode.extractQuotedText('"something', ["more", "data\""]);
+                expect(result[0]).to.equal('something more data');
+                expect(result[1].length).to.equal(0);
+            });
+        });
+        describe("multi term quote with single quotes", function () {
+            it("matches", function () {
+                var result = bbcode.extractQuotedText('\'something', ["more", "\"data'"]);
+                expect(result[0]).to.equal('something more \"data');
+                expect(result[1].length).to.equal(0);
+            });
+        });
+    });
+
+    describe('parseParams', function () {
+        describe("simple with no additional tag", function () {
+            it("matches", function () {
+                var params = bbcode.parseParams('name', "Link");
+                expect(Object.keys(params).length).to.equal(1);
+                expect(params['name']).to.equal('Link');
+            });
+        });
+        describe("simple with no additional tag, with quotes", function () {
+            it("matches", function () {
+                var params = bbcode.parseParams('name', "\"Link\"");
+                expect(Object.keys(params).length).to.equal(1);
+                expect(params['name']).to.equal('Link');
+            });
+        });
+        describe("multi params", function () {
+            it("matches", function () {
+                var params = bbcode.parseParams('quote', "name=\"Zelda\" post=93846865");
+                expect(Object.keys(params).length).to.equal(2);
+                expect(params['name']).to.equal('Zelda');
+                expect(params['post']).to.equal('93846865');
             });
         });
     });
