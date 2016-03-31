@@ -1,7 +1,7 @@
 {
   "name": "bbcode.js",
   "description": "Simple bbcode rendering library",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "dependencies": {},
   "devDependencies": {
     "broccoli": "^0.16.9",
